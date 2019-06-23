@@ -1,20 +1,34 @@
 fun main(args: Array<String>) {
+    val orderedArray = arrayOf(1, 3, 6, 8, 10, 13, 15, 18, 22, 25, 35, 40)
+    println(orderedArray.joinToString { "$it" })
+    binarySearch(orderedArray, 26)
+}
 
-    val orderedArray = arrayOfNulls<Int>(10)
-    sortedInsert(orderedArray, 1)
-    sortedInsert(orderedArray, 2)
-    sortedInsert(orderedArray, 3)
-    sortedInsert(orderedArray, 4)
-    sortedInsert(orderedArray, 5)
-    sortedInsert(orderedArray, 6)
-    sortedInsert(orderedArray, 7)
-    sortedInsert(orderedArray, 8)
-    sortedInsert(orderedArray, 9)
-    println(orderedArray.joinToString { "$it" })
-    sortedInsert(orderedArray, 19)
-    println(orderedArray.joinToString { "$it" })
-    linearSearchOrdered(orderedArray, 19)
-    linearSearchOrdered(orderedArray, 18)
+fun binarySearch(a: Array<Int>, v: Int) {
+    var start = 0
+    var mid = a.size / 2
+    var end = a.size - 1
+    while(true) {
+        if (a[mid] == v) {
+            println("$start, $mid, $end, ${a[mid]}")
+            println("A index of target value is $mid")
+            return
+        }
+        if (start == mid || end == mid) {
+            println("Value not found.")
+            return
+        }
+        if (a[mid] > v) {
+            println("$start, $mid, $end, ${a[mid]}")
+            end = mid
+            mid -= (end - start) / 2
+        }
+        if (a[mid] < v) {
+            println("$start, $mid, $end, ${a[mid]}")
+            start = mid
+            mid += (end - start) / 2
+        }
+    }
 }
 
 fun linearSearchOrdered(a: Array<Int?>, v: Int) {
