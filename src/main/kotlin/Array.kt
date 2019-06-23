@@ -12,6 +12,21 @@ fun main(args: Array<String>) {
     println(orderedArray.joinToString { "$it" })
     sortedInsert(orderedArray, 19)
     println(orderedArray.joinToString { "$it" })
+    searchOrdered(orderedArray, 19)
+    searchOrdered(orderedArray, 18)
+}
+
+fun searchOrdered(a: Array<Int?>, v: Int) {
+    for(i in 0..a.size) {
+        if (a[i] == null || a[i]!! > v) {
+            println("Target value is not contained.")
+            return
+        }
+        if (a[i]!! == v) {
+            println("An index of target value is $i")
+            return
+        }
+    }
 }
 
 fun sortedInsert(a: Array<Int?>, v: Int) {
