@@ -6,9 +6,10 @@ fun main() {
 }
 
 fun bubbleSort(a: Array<Int>): Array<Int> {
+    var fixedIndex = a.size-2
     while(true) {
         var swapped = false
-        for (i in 0..(a.size-2)) {
+        for (i in 0..fixedIndex) {
             val left = a[i]
             val right = a[i + 1]
             if (left > right) {
@@ -16,7 +17,9 @@ fun bubbleSort(a: Array<Int>): Array<Int> {
                 a[i + 1] = left
                 swapped = true
             }
+            println(fixedIndex)
         }
+        fixedIndex--
         if (!swapped) {
             return a
         }
