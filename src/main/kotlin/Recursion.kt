@@ -11,9 +11,12 @@ fun countdown(number: Int) {
     countdown(number - 1)
 }
 
-fun factorial(number: Int, v: Int = 1): Int {
-    if (number <= 0) {
-        return v
+fun factorial(number: Int): Int {
+    if (number < 1) {
+        println("Invalid argument.")
     }
-    return factorial(number - 1, v * number)
+    if (number == 1) {
+        return number
+    }
+    return number * factorial(number - 1)
 }
