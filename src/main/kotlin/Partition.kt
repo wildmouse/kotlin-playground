@@ -1,11 +1,11 @@
 fun main() {
     val array = arrayOf(0, 5, 2, 1, 6, 3)
     println(array.joinToString { it.toString() })
-    val sortedArray = partition(array)
+    val (sortedArray, _) = partition(array)
     println(sortedArray.joinToString { it.toString() })
 }
 
-fun partition(a: Array<Int>): Array<Int> {
+fun partition(a: Array<Int>): Pair<Array<Int>, Int> {
     var i = 0
     var j = a.size - 2
     val pivotIndex = a.size - 1
@@ -28,5 +28,5 @@ fun partition(a: Array<Int>): Array<Int> {
     a[pivotIndex] = a[i]
     a[i] = pivot
 
-    return a
+    return Pair(a, i)
 }
