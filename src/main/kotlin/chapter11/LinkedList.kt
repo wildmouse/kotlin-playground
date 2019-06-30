@@ -10,10 +10,10 @@ fun main() {
     third.link = fourth
 
     val linkedList = LinkedList(first)
-    println(linkedList.read(2))
 
-    println(linkedList.search("c"))
-    println(linkedList.search("t"))
+    linkedList.insert("zero", 5)
+
+    linkedList.printAllNodes()
 }
 
 class LinkedList(var firstNode: Node) {
@@ -41,6 +41,23 @@ class LinkedList(var firstNode: Node) {
             aNode = aNode.link!!
             i++
         }
+    }
+
+    fun insert(value: String, index: Int) {
+        val newNode = Node(value, firstNode)
+        var previousNode = firstNode
+        var targetNode = firstNode.link
+        for (i in 1 until index) {
+            if (targetNode == null) {
+                println("Index out of bound.")
+                return
+            }
+            previousNode = targetNode!!
+            targetNode = targetNode.link
+        }
+
+        previousNode.link = newNode
+        newNode.link = targetNode
     }
 
     fun printAllNodes() {
