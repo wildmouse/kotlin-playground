@@ -11,8 +11,7 @@ fun main() {
 
     val linkedList = LinkedList(first)
 
-    linkedList.insert("zero", 5)
-
+    linkedList.delete(4)
     linkedList.printAllNodes()
 }
 
@@ -45,6 +44,10 @@ class LinkedList(var firstNode: Node) {
 
     fun insert(value: String, index: Int) {
         val newNode = Node(value, firstNode)
+        if (index == 0) {
+            newNode.link = firstNode
+            firstNode = newNode
+        }
         var previousNode = firstNode
         var targetNode = firstNode.link
         for (i in 1 until index) {
@@ -58,6 +61,24 @@ class LinkedList(var firstNode: Node) {
 
         previousNode.link = newNode
         newNode.link = targetNode
+    }
+
+    fun delete(index: Int) {
+        if (index == 0) {
+            firstNode = firstNode.link!!
+            return
+        }
+        var previousNode = firstNode
+        var targetNode = firstNode.link!!
+        for(i in 1 until index) {
+            if (targetNode.link == null) {
+                println("No such element.")
+                return
+            }
+            previousNode = targetNode
+            targetNode = previousNode.link!!
+        }
+        previousNode.link = targetNode.link
     }
 
     fun printAllNodes() {
