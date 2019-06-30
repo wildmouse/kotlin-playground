@@ -10,10 +10,21 @@ fun main() {
     third.link = fourth
 
     val linkedList = LinkedList(first)
-    linkedList.printAllNodes()
+    println(linkedList.read(2))
 }
 
 class LinkedList(var firstNode: Node) {
+    fun read(index: Int): String {
+        var aNode = firstNode
+        for(i in 0 until index) {
+            if (aNode.link == null) {
+                println("No such element.")
+            }
+            aNode = aNode.link!!
+        }
+        return aNode.value
+    }
+
     fun printAllNodes() {
         var aNode = firstNode
         while(true)
