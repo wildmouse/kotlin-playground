@@ -1,17 +1,27 @@
 package chapter12
 
 fun main() {
-    val aNode1 = Node(1)
-    val aNode2 = Node(10)
-    val tree = BinaryTree(Node(5, aNode1, aNode2))
-
-    tree.insert(8)
-    val target = tree.search(8)
-    println(target?.value.toString())
+    val tree = BinaryTree(Node(50))
+    tree.insert(25)
+    tree.insert(10)
+    tree.insert(4)
+    tree.insert(11)
+    tree.insert(33)
+    tree.insert(30)
+    tree.insert(40)
+    tree.insert(75)
+    tree.insert(56)
+    tree.insert(52)
+    tree.insert(61)
+    tree.insert(89)
+    tree.insert(82)
+    tree.insert(95)
+    tree.delete(50)
+    tree
 }
 
 class BinaryTree(
-    var root: Node
+    private var root: Node
 ) {
     fun search(v: Int, node: Node? = root): Node? {
         return if (node == null || node.value == v) {
@@ -44,6 +54,40 @@ class BinaryTree(
             insert(v, node.right!!)
         }
     }
+
+    fun delete(v: Int, node: Node? = root): Node? {
+        when {
+            node == null -> return null
+            v < node.value -> {
+                node.left = delete(v, node.left)
+                return node
+            }
+            v > node.value -> {
+                node.right = delete(v, node.right)
+                return node
+            }
+            else -> {
+                if (node.left == null) {
+                    return node.right
+                }
+                if (node.right == null) {
+                    return node.left
+                }
+                node.right = lift(node.right!!, node)
+                return node
+            }
+        }
+    }
+
+    private fun lift(node: Node, nodeToDelete: Node): Node {
+        return if (node.left != null) {
+            node.left = lift(node.left!!, nodeToDelete)
+            node
+        } else {
+            nodeToDelete.value = node.value
+            node.right!!
+        }
+    }
 }
 
 class Node(
@@ -52,19 +96,3 @@ class Node(
     var right: Node? = null
 )
 
-//class Node(
-//    var value: Int,
-//    var left: Node? = null,
-//    var right: Node? = null
-//) {
-//    fun insert(v: Int) {
-//        val newNode = Node(v)
-//        if (value > v && left == null) {
-//            left = newNode
-//            return
-//        }
-//        if (value > v) {
-//            insert(v, left!!)
-//        }
-//    }
-//}
