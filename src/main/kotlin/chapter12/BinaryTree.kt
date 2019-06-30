@@ -16,8 +16,7 @@ fun main() {
     tree.insert(89)
     tree.insert(82)
     tree.insert(95)
-    tree.delete(50)
-    tree
+    tree.traverseAndPrint()
 }
 
 class BinaryTree(
@@ -77,6 +76,15 @@ class BinaryTree(
                 return node
             }
         }
+    }
+
+    fun traverseAndPrint(node: Node? = root) {
+        if (node == null) {
+            return
+        }
+        traverseAndPrint(node.left)
+        println(node.value)
+        traverseAndPrint(node.right)
     }
 
     private fun lift(node: Node, nodeToDelete: Node): Node {
