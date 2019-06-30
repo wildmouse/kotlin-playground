@@ -11,6 +11,9 @@ fun main() {
 
     val linkedList = LinkedList(first)
     println(linkedList.read(2))
+
+    println(linkedList.search("c"))
+    println(linkedList.search("t"))
 }
 
 class LinkedList(var firstNode: Node) {
@@ -23,6 +26,21 @@ class LinkedList(var firstNode: Node) {
             aNode = aNode.link!!
         }
         return aNode.value
+    }
+
+    fun search(v: String): Int? {
+        var aNode = firstNode
+        var i = 0
+        while(true) {
+            if (aNode.value == v) {
+                return i
+            }
+            if (aNode.link == null) {
+                return null
+            }
+            aNode = aNode.link!!
+            i++
+        }
     }
 
     fun printAllNodes() {
